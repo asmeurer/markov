@@ -3,6 +3,7 @@
 import json
 from pprint import pprint
 from collections import defaultdict
+import sys
 
 from pymarkovchain import MarkovChain
 
@@ -37,7 +38,11 @@ def main():
     # To generate the markov chain's language model, in case it's not present
     mc.generateDatabase('\n'.join(get_hangouts_text()))
     # To let the markov chain generate some text, execute
-    print(mc.generateString())
+    if len(sys.argv) > 1:
+        print(mc.generateStringWithSeed(' '.join(sys.argv[1:])))
+    else:
+        print(mc.generateString())
+
 
 if __name__ == '__main__':
     main()
