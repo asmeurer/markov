@@ -29,3 +29,6 @@ def main():
     mc.generateDatabase('\n'.join(get_hangouts_text()))
     # To let the markov chain generate some text, execute
     print(mc.generateString())
+
+if __name__ == '__main__':
+    main()
