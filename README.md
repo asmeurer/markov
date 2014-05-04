@@ -1,4 +1,4 @@
-Generate Markov Text from your Hangouts Chat
+## Generate Markov Text from your Hangouts Chat
 
 You need to go to https://www.google.com/settings/takeout/custom and download
 your hangouts as json. Then go in and find the chat you are interested in. For
