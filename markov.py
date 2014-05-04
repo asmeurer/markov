@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import json
+from pprint import pprint
+from collections import defaultdict
 
 from pymarkovchain import MarkovChain
 
@@ -9,11 +11,18 @@ def get_hangouts_text():
     with open('hangouts.json') as f:
         j = json.load(f)
 
+    empty = defaultdict(list)
+
     text = []
     for item in j:
         if 'chat_message' in item:
-            for segment in item['chat_message']['segment']:
-                text.append(segment['text'])
+            try:
+                for segment in item['chat_message']['message_content'].get('segment', []):
+                    if 'text' in segment:
+                        text.append(segment['text'])
+            except KeyError:
+                pprint(item)
+                raise
         if 'conversation_rename' in item:
             # Only add the new name. The old name was already added
             text.append(item['conversation_rename']['new_name'])
