@@ -2,7 +2,7 @@
 
 You need to go to https://www.google.com/settings/takeout/custom and download
 your hangouts as json. Then go in and find the chat you are interested in. For
-me, it was the most recent one, so
+me, it was the most recent one, so (in Python)
 
 ```py
 >>> import json
@@ -15,12 +15,12 @@ me, it was the most recent one, so
 
 Then run
 
-```py
->>> ./markov.py
+```bash
+$ ./markov.py
 ```
 
 to generate a sentence. You an also supply a seed like,
 
-```py
->>> ./markov.py you are
+```bash
+$ ./markov.py you are
 ```
