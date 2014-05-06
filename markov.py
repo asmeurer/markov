@@ -32,15 +32,18 @@ def get_hangouts_text():
     return text
 
 def main():
+    # Regenerate the model only if the database or this file are newer. We
+    # need to check this here because MarkovChain creates an empty database if
+    # none exists.
+    regen = (not os.path.exists('./markov') or os.path.getmtime('markov') <
+        os.path.getmtime('hangouts.json') or os.path.getmtime('markov') <
+        os.path.getmtime(__file__))
+
     # Create an instance of the markov chain. By default, it uses MarkovChain.py's location to
     # store and load its database files to. You probably want to give it another location, like so:
     mc = MarkovChain("./markov")
 
-    # Regenerate the model only if the database or this file are newer
-    if (not os.path.exists('markov') or os.path.getmtime('markov') <
-        os.path.getmtime('hangouts.json') or os.path.getmtime('markov') <
-        os.path.getmtime(__file__)):
-
+    if regen:
         mc.generateDatabase('\n'.join(get_hangouts_text()))
 
     # To let the markov chain generate some text, execute
