@@ -29,7 +29,7 @@ def get_hangouts_text():
             # Only add the new name. The old name was already added
             text.append(item['conversation_rename']['new_name'])
 
-    return text
+    return map(str.lower, text)
 
 def main():
     # Regenerate the model only if the database or this file are newer. We
