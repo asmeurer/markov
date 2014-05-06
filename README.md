@@ -1,5 +1,10 @@
 ## Generate Markov Text from your Hangouts Chat
 
+This uses https://github.com/TehMillhouse/PyMarkovChain to generate random
+sentences from your Google Hangouts chat using Markov Chains.
+
+### How to use
+
 You need to go to https://www.google.com/settings/takeout/custom and download
 your hangouts as json. Then go in and find the chat you are interested in. For
 me, it was the most recent one, so (in Python)
