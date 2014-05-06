@@ -4,6 +4,7 @@ import json
 from pprint import pprint
 from collections import defaultdict
 import sys
+import os
 
 from pymarkovchain import MarkovChain
 
@@ -35,8 +36,13 @@ def main():
     # store and load its database files to. You probably want to give it another location, like so:
     mc = MarkovChain("./markov")
 
-    # To generate the markov chain's language model, in case it's not present
-    mc.generateDatabase('\n'.join(get_hangouts_text()))
+    # Regenerate the model only if the database or this file are newer
+    if (not os.path.exists('markov') or os.path.getmtime('markov') <
+        os.path.getmtime('hangouts.json') or os.path.getmtime('markov') <
+        os.path.getmtime(__file__)):
+
+        mc.generateDatabase('\n'.join(get_hangouts_text()))
+
     # To let the markov chain generate some text, execute
     if len(sys.argv) > 1:
         print(mc.generateStringWithSeed(' '.join(sys.argv[1:])))
