@@ -52,7 +52,6 @@ def main():
     if regen:
         text = '\n'.join(get_hangouts_text())
         text = delete_links(text)
-        print(text)
         mc.generateDatabase(text)
 
     # To let the markov chain generate some text, execute
