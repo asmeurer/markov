@@ -5,8 +5,14 @@ from pprint import pprint
 from collections import defaultdict
 import sys
 import os
+import re
 
 from pymarkovchain import MarkovChain
+
+link_re = re.compile(r'https?://\S*')
+
+def delete_links(text):
+    return link_re.sub('', text)
 
 def get_hangouts_text():
     # Should just be one conversation from 'conversation_state'
@@ -44,7 +50,10 @@ def main():
     mc = MarkovChain("./markov")
 
     if regen:
-        mc.generateDatabase('\n'.join(get_hangouts_text()))
+        text = '\n'.join(get_hangouts_text())
+        text = delete_links(text)
+        print(text)
+        mc.generateDatabase(text)
 
     # To let the markov chain generate some text, execute
     if len(sys.argv) > 1:
