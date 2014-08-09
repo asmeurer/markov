@@ -24,7 +24,7 @@ Then run
 $ ./markov.py
 ```
 
-to generate a sentence. You an also supply a seed like,
+to generate a sentence. You can also supply a seed like,
 
 ```bash
 $ ./markov.py you are
